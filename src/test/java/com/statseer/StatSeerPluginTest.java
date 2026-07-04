@@ -1,13 +1,13 @@
-package com.example;
+package com.statseer;
 
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 
-public class ExamplePluginTest
+public class StatSeerPluginTest
 {
 	public static void main(String[] args) throws Exception
 	{
-		ExternalPluginManager.loadBuiltin(ExamplePlugin.class);
+		ExternalPluginManager.loadBuiltin(StatSeerPlugin.class);
 		RuneLite.main(args);
 	}
 }
