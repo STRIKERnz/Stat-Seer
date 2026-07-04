@@ -9,7 +9,7 @@ Set a hotkey, hold it while hovering an equippable item, and Stat Seer shows the
 - Hold-to-preview equipment stat bonuses while hovering items
 - Compare hovered equipment against your currently equipped gear
 - Works with inventory, worn equipment, and supported bank item tooltips
-- Reuses RuneLite's Item Stats formatting and display preferences
+- Reuses RuneLite's Item Stats equipment-tooltip rendering
 - Does not consume the hotkey while typing in chat or focused input fields
 - Shows equipment stats without needing to keep Item Stats tooltips always enabled
 
@@ -24,7 +24,7 @@ Set a hotkey, hold it while hovering an equippable item, and Stat Seer shows the
 
 Stat Seer intentionally does not add a toggle mode. If you want equipment stats visible all the time, RuneLite's built-in Item Stats plugin already covers that use case. Stat Seer is for temporary, on-demand checks.
 
-The tooltip respects RuneLite's Item Stats display settings for things like colors, weight, bank display, and base stats.
+Stat Seer uses its own hotkey setting and enables the equipment-stat tooltip for its temporary overlay. You do not need to enable RuneLite's Item Stats plugin separately.
 
 ## Troubleshooting
 

@@ -1,7 +1,6 @@
 package com.statseer;
 
 import com.google.inject.Provides;
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.inject.Inject;
 import net.runelite.api.Client;
@@ -122,9 +121,8 @@ public class StatSeerPlugin extends Plugin
 	}
 
 	@Provides
-	ItemStatConfig provideItemStatConfig(ConfigManager configManager)
+	ItemStatConfig provideItemStatConfig()
 	{
-		final ItemStatConfig itemStatConfig = configManager.getConfig(ItemStatConfig.class);
 		return new ItemStatConfig()
 		{
 			@Override
@@ -140,69 +138,9 @@ public class StatSeerPlugin extends Plugin
 			}
 
 			@Override
-			public boolean relative()
+			public boolean geStats()
 			{
-				return itemStatConfig.relative() || (!itemStatConfig.absolute() && !itemStatConfig.theoretical());
-			}
-
-			@Override
-			public boolean absolute()
-			{
-				return itemStatConfig.absolute();
-			}
-
-			@Override
-			public boolean theoretical()
-			{
-				return itemStatConfig.theoretical();
-			}
-
-			@Override
-			public boolean showWeight()
-			{
-				return itemStatConfig.showWeight();
-			}
-
-			@Override
-			public boolean showStatsInBank()
-			{
-				return itemStatConfig.showStatsInBank();
-			}
-
-			@Override
-			public boolean alwaysShowBaseStats()
-			{
-				return itemStatConfig.alwaysShowBaseStats();
-			}
-
-			@Override
-			public Color colorBetterUncapped()
-			{
-				return itemStatConfig.colorBetterUncapped();
-			}
-
-			@Override
-			public Color colorBetterSomeCapped()
-			{
-				return itemStatConfig.colorBetterSomeCapped();
-			}
-
-			@Override
-			public Color colorBetterCapped()
-			{
-				return itemStatConfig.colorBetterCapped();
-			}
-
-			@Override
-			public Color colorNoChange()
-			{
-				return itemStatConfig.colorNoChange();
-			}
-
-			@Override
-			public Color colorWorse()
-			{
-				return itemStatConfig.colorWorse();
+				return false;
 			}
 		};
 	}
