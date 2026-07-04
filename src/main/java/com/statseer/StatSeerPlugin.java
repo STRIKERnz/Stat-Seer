@@ -1,5 +1,7 @@
 package com.statseer;
 
+import com.google.inject.Binder;
+import com.google.inject.PrivateModule;
 import com.google.inject.Provides;
 import java.awt.event.KeyEvent;
 import javax.inject.Inject;
@@ -23,6 +25,27 @@ import net.runelite.client.ui.overlay.OverlayManager;
 )
 public class StatSeerPlugin extends Plugin
 {
+	private static final ItemStatConfig ITEM_STAT_CONFIG = new ItemStatConfig()
+	{
+		@Override
+		public boolean consumableStats()
+		{
+			return false;
+		}
+
+		@Override
+		public boolean equipmentStats()
+		{
+			return true;
+		}
+
+		@Override
+		public boolean geStats()
+		{
+			return false;
+		}
+	};
+
 	@Inject
 	private Client client;
 
@@ -87,6 +110,21 @@ public class StatSeerPlugin extends Plugin
 	};
 
 	@Override
+	public void configure(Binder binder)
+	{
+		binder.install(new PrivateModule()
+		{
+			@Override
+			protected void configure()
+			{
+				bind(ItemStatConfig.class).toInstance(ITEM_STAT_CONFIG);
+				bind(StatSeerOverlay.class);
+				expose(StatSeerOverlay.class);
+			}
+		});
+	}
+
+	@Override
 	protected void startUp()
 	{
 		keyManager.registerKeyListener(hotkeyListener);
@@ -118,30 +156,5 @@ public class StatSeerPlugin extends Plugin
 	StatSeerConfig provideConfig(ConfigManager configManager)
 	{
 		return configManager.getConfig(StatSeerConfig.class);
-	}
-
-	@Provides
-	ItemStatConfig provideItemStatConfig()
-	{
-		return new ItemStatConfig()
-		{
-			@Override
-			public boolean consumableStats()
-			{
-				return false;
-			}
-
-			@Override
-			public boolean equipmentStats()
-			{
-				return true;
-			}
-
-			@Override
-			public boolean geStats()
-			{
-				return false;
-			}
-		};
 	}
 }
