@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.inject.Inject;
 import net.runelite.api.Client;
 import net.runelite.api.gameval.VarClientID;
+import net.runelite.api.vars.InputType;
 import net.runelite.client.config.Keybind;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.config.ConfigManager;
@@ -143,13 +144,21 @@ public class StatSeerPlugin extends Plugin
 
 	boolean isInspecting()
 	{
-		return hotkeyDown;
+		return hotkeyDown && !isTyping();
 	}
 
 	private boolean isTyping()
 	{
+		final int inputType = client.getVarcIntValue(VarClientID.MESLAYERMODE);
 		return client.getFocusedInputFieldWidget() != null
-			|| client.getVarcIntValue(VarClientID.WORLDMAP_SEARCHING) != 0;
+			|| client.getVarcIntValue(VarClientID.WORLDMAP_SEARCHING) != 0
+			|| inputType != InputType.NONE.getType()
+			|| hasText(client.getVarcStrValue(VarClientID.CHATINPUT));
+	}
+
+	private static boolean hasText(String value)
+	{
+		return value != null && !value.isEmpty();
 	}
 
 	@Provides
